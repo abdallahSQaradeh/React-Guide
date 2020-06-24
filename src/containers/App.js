@@ -7,7 +7,8 @@ import ErrorBoundary from "../components/ErrorBoundary/ErrorBoundary";
 import Persons from "../components/Persons/Persons";
 import Cockpit from "../components/Cockpit/Cockpit";
 import WithClass from "../hoc/WithClass";
-
+import withClassV2 from "../hoc/withClassV2";
+import Aux from "../hoc/Auxiliary";
 const StyledButton = styled.button`
 background-color: ${(props) => (props.alt ? "red" : "green")};
  font: inherit;
@@ -103,9 +104,9 @@ class App extends Component {
       );
     }
 
+    //<WithClass classes={classes}>
     return (
-      //<StyleRoot>
-      <WithClass classes={classes.App}>
+      <Aux>
         <button
           onClick={() => {
             this.setState({ showCockpit: false });
@@ -122,7 +123,7 @@ class App extends Component {
           />
         ) : null}
         {persons}
-      </WithClass>
+      </Aux>
     );
   }
   /*
@@ -149,4 +150,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withClassV2(App, classes.App);
