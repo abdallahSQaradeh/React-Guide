@@ -55,7 +55,7 @@ class Person extends Component {
     );
   }
   componentDidUpdate() {
-    console.log("[Persons.js] componentDidUpdate");
+    console.log("[Person.js] componentDidUpdate");
   }
 }
 export default Person;

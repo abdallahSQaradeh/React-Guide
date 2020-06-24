@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, memo } from "react";
 import classes from "./Cockpit.css";
 const Cockpit = (props) => {
   useEffect(() => {
     console.log("[Cockpi.js] useEffect");
-    setTimeout(() => {
+    let timer = setTimeout(() => {
       alert("saved data into cloud");
     }, 1000);
     return () => {
+      //clearTimeout(timer);
       // *this returns before the main useEffect function but after the first render cycle
       console.log("[Cockpit.js] cleanup work in useEffect");
     };
@@ -26,10 +27,10 @@ const Cockpit = (props) => {
   });
   let btnClass = "";
   let assignClasses = [];
-  if (props.persons.length <= 2) {
+  if (props.personsLength <= 2) {
     assignClasses.push(classes.red); //classes = ['red]
   }
-  if (props.persons.length <= 1) {
+  if (props.personsLength <= 1) {
     assignClasses.push(classes.bold);
   }
   if (props.show) {
@@ -46,4 +47,5 @@ const Cockpit = (props) => {
   );
 };
 
-export default Cockpit;
+export default memo(Cockpit);
+//memo : React will store a snapshot  of this component, only if its input xhanges it will rerender it , else if its input does not change and some parent component wants to update this component react will give back the stored component
