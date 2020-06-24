@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import classes from "./Person.css";
 import Radium from "radium";
 import styled from "styled-components";
@@ -41,6 +41,7 @@ class Person extends Component {
     console.log("[Person.js] Render");
     return (
       <Aux>
+        {/*Also same to Aux you can use <Fragment></Fragment> */}
         <p key="i1" onClick={this.props.click}>
           I'm {this.props.name} and i am {this.props.age} !years old
         </p>

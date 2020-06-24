@@ -6,6 +6,8 @@ import styled from "styled-components";
 import ErrorBoundary from "../components/ErrorBoundary/ErrorBoundary";
 import Persons from "../components/Persons/Persons";
 import Cockpit from "../components/Cockpit/Cockpit";
+import WithClass from "../hoc/WithClass";
+
 const StyledButton = styled.button`
 background-color: ${(props) => (props.alt ? "red" : "green")};
  font: inherit;
@@ -103,7 +105,7 @@ class App extends Component {
 
     return (
       //<StyleRoot>
-      <div className={classes.App}>
+      <WithClass classes={classes.App}>
         <button
           onClick={() => {
             this.setState({ showCockpit: false });
@@ -120,7 +122,7 @@ class App extends Component {
           />
         ) : null}
         {persons}
-      </div>
+      </WithClass>
     );
   }
   /*
