@@ -3,7 +3,7 @@ import classes from "./Person.css";
 import Radium from "radium";
 import styled from "styled-components";
 import Aux from "../../../hoc/Auxiliary";
-
+import withClassV2 from "../../../hoc/withClassV2";
 class Person extends Component {
   // !const random = Math.random();
   // !if (random > 0.7) {
@@ -59,7 +59,7 @@ class Person extends Component {
     console.log("[Person.js] componentDidUpdate");
   }
 }
-export default Person;
+export default withClassV2(Person, classes.Person);
 // ? export default Radium(person);
 // ! for sudo css Wrap Person with Radium is enough, However for
 // ! animation or transformation or even media query this isn't enought
