@@ -38,21 +38,18 @@ class Person extends Component {
   };
   render() {
     console.log("[Person.js] Render");
-    return (
-      //<div className="Person" style={style}>
-      <div className={classes.Person}>
-        <p onClick={this.props.click}>
-          I'm {this.props.name} and i am {this.props.age} !years old
-        </p>
-        <p>{this.props.children}</p>
-        <input
-          type="text"
-          onChange={this.props.changed}
-          value={this.props.name}
-        />
-      </div>
-      // </div>
-    );
+    return [
+      <p key="i1" onClick={this.props.click}>
+        I'm {this.props.name} and i am {this.props.age} !years old
+      </p>,
+      <p key="i2">{this.props.children}</p>,
+      <input
+        key="i3"
+        type="text"
+        onChange={this.props.changed}
+        value={this.props.name}
+      />,
+    ];
   }
   componentDidUpdate() {
     console.log("[Person.js] componentDidUpdate");
