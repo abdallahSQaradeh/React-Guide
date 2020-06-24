@@ -48,4 +48,4 @@ const Cockpit = (props) => {
 };
 
 export default memo(Cockpit);
-//memo : React will store a snapshot  of this component, only if its input xhanges it will rerender it , else if its input does not change and some parent component wants to update this component react will give back the stored component
+//memo(only for functional component) : React will store a snapshot  of this component, only if its input xhanges it will rerender it , else if its input does not change and some parent component wants to update this component react will give back the stored component
