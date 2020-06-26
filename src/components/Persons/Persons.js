@@ -31,7 +31,7 @@ class Persons extends PureComponent {
           name={person.name}
           age={person.age}
           click={() => this.props.delete(index)}
-          changed={(event) => this.props.change(event, person.id)}
+          changed={(event) => this.props.change(event, index)}
         />
       );
     });

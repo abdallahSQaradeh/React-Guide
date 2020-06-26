@@ -4,6 +4,7 @@ import Radium from "radium";
 import styled from "styled-components";
 import Aux from "../../../hoc/Auxiliary";
 import withClassV2 from "../../../hoc/withClassV2";
+import PropTypes from "prop-types";
 class Person extends Component {
   // !const random = Math.random();
   // !if (random > 0.7) {
@@ -59,6 +60,14 @@ class Person extends Component {
     console.log("[Person.js] componentDidUpdate");
   }
 }
+
+//this allow you to warn people if the props that passed is different of type from that its except
+Person.propTypes = {
+  click: PropTypes.func,
+  name: PropTypes.string,
+  age: PropTypes.number,
+  changed: PropTypes.func,
+};
 export default withClassV2(Person, classes.Person);
 // ? export default Radium(person);
 // ! for sudo css Wrap Person with Radium is enough, However for

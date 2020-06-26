@@ -34,12 +34,13 @@ class App extends Component {
   // * don't add parantheses() to where you call your function, cause react will call it imediatly when it render if you do that
   state = {
     persons: [
-      { name: "MAx", age: 28 },
-      { name: "Manu", age: 29 },
-      { name: "Stephanie", age: 26 },
+      { id: 0, name: "MAx", age: "28" },
+      { id: 1, name: "Manu", age: 29 },
+      { id: 2, name: "Stephanie", age: 26 },
     ],
     showPersons: false,
     showCockpit: true,
+    counter: 0,
   }; // * useState : return ana arraywith exactly two element
   // * first element : current state
   // *second element : it is a function that allows us to updatae this state
@@ -75,6 +76,7 @@ class App extends Component {
     persons[personIndex] = person;
     this.setState({
       persons: persons,
+      counter: this.state.counter + 1,
     });
   };
   deletePErsonHandler = (index) => {
