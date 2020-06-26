@@ -10,6 +10,10 @@ class Person extends Component {
   // !if (random > 0.7) {
   // !  throw new Error("some thing went wrong");
   // !}
+  constructor(props) {
+    super(props);
+    this.inputElementRef = React.createRef();
+  }
   shouldComponentUpdate(nextProps, nextState) {
     console.log("[Person.js]  shouldComponentUpdate");
     return true;
@@ -50,11 +54,24 @@ class Person extends Component {
         <input
           key="i3"
           type="text"
+          //? ref={(inpuElement) => {
+          //?   inpuElement.focus();
+          //? }}
+
+          //ToDo ref={(inp) => {
+          //ToDo   this.inputElementRefv = inp;
+          //ToDo }}
+          ref={this.inputElementRef}
           onChange={this.props.changed}
           value={this.props.name}
         />
       </Aux>
     );
+  }
+  componentDidMount() {
+    //? document.querySelector("input").focus();
+    //ToDo this.inputElementRefv.focus();
+    this.inputElementRef.current.focus();
   }
   componentDidUpdate() {
     console.log("[Person.js] componentDidUpdate");
