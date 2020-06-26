@@ -1,11 +1,16 @@
-import React, { useEffect, memo } from "react";
+import React, { useEffect, memo, useRef } from "react";
 import classes from "./Cockpit.css";
 const Cockpit = (props) => {
+  const toggleButtonRef = useRef(null);
+
   useEffect(() => {
     console.log("[Cockpi.js] useEffect");
     let timer = setTimeout(() => {
       alert("saved data into cloud");
     }, 1000);
+    toggleButtonRef.current.click(); //* we use toggleButtonRef here because
+    //*it get defined after rendered te jsx so this help us to avoid Errors
+
     return () => {
       //clearTimeout(timer);
       // *this returns before the main useEffect function but after the first render cycle
@@ -40,7 +45,7 @@ const Cockpit = (props) => {
     <div className={classes.Cockpit}>
       <h1> {props.title} </h1>
       <p className={assignClasses.join(" ")}>this is really working</p>
-      <button onClick={props.toggle} className={btnClass}>
+      <button ref={toggleButtonRef} onClick={props.toggle} className={btnClass}>
         Toggle persons
       </button>
     </div>
