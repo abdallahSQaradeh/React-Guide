@@ -1,5 +1,6 @@
 import React, { Component, PureComponent } from "react";
 import Person from "./Person/Person";
+import AuthContext from "../../context/auth-context";
 class Persons extends PureComponent {
   // * static getDerivedStateFromProps(props, state) {
   // *   console.log("[Persons.js]  getDerivedFromState");
@@ -24,17 +25,25 @@ class Persons extends PureComponent {
   render() {
     console.log("[Persons.js] Rendering...");
 
-    return this.props.persons.map((person, index) => {
-      return (
-        <Person
-          key={index}
-          name={person.name}
-          age={person.age}
-          click={() => this.props.delete(index)}
-          changed={(event) => this.props.change(event, index)}
-        />
-      );
-    });
+    return (
+      <AuthContext.Consumer>
+        {/* //ToDo : does not take jsx code as child, but insted it takes a function , However we don't need AuthContext to be here, cause we concern with Person not Persons so we'll Remove it from here */}
+        {(context) =>
+          this.props.persons.map((person, index) => {
+            return (
+              <Person
+                key={index}
+                name={person.name}
+                age={person.age}
+                click={() => this.props.delete(index)}
+                changed={(event) => this.props.change(event, person.id)}
+                isAuth={this.props.isAuthenticated}
+              />
+            );
+          })
+        }
+      </AuthContext.Consumer>
+    );
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {

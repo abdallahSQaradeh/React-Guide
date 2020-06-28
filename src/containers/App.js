@@ -9,6 +9,7 @@ import Cockpit from "../components/Cockpit/Cockpit";
 import WithClass from "../hoc/WithClass";
 import withClassV2 from "../hoc/withClassV2";
 import Aux from "../hoc/Auxiliary";
+import AuthContext from "../context/auth-context";
 const StyledButton = styled.button`
 background-color: ${(props) => (props.alt ? "red" : "green")};
  font: inherit;
@@ -41,11 +42,15 @@ class App extends Component {
     showPersons: false,
     showCockpit: true,
     counter: 0,
+    authenticated: false,
   }; // * useState : return ana arraywith exactly two element
   // * first element : current state
   // *second element : it is a function that allows us to updatae this state
 
   //jsx must have one root element not more that
+  loginHandler = () => {
+    this.setState({ authenticated: true });
+  };
 
   switchNameHAndler = (newNAme) => {
     //console.log("was clicked");
@@ -101,6 +106,7 @@ class App extends Component {
             delete={this.deletePErsonHandler}
             change={this.nameChangedHandler}
             persons={this.state.persons}
+            isAuthenticated={this.state.authenticated}
           />
         </div>
       );
@@ -116,15 +122,26 @@ class App extends Component {
         >
           Remove Cockpit
         </button>
-        {this.state.showCockpit ? (
-          <Cockpit
-            title={this.props.appTitle}
-            toggle={this.togglePersonsHandler}
-            personsLength={this.state.persons.length}
-            show={this.state.showPersons}
-          />
-        ) : null}
-        {persons}
+
+        <AuthContext.Provider
+          value={{
+            authenticated: this.state.authenticated,
+            ligin: this.loginHandler,
+          }}
+        >
+          {/* // !Should Wrap all te element that involved in authentication 
+        //! Such as Cockpit and Persons (Who affected by the login click , React will ReRender if context or props Change  */}
+          {this.state.showCockpit ? (
+            <Cockpit
+              title={this.props.appTitle}
+              toggle={this.togglePersonsHandler}
+              personsLength={this.state.persons.length}
+              show={this.state.showPersons}
+              login={this.loginHandler}
+            />
+          ) : null}
+          {persons}
+        </AuthContext.Provider>
       </Aux>
     );
   }

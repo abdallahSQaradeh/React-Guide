@@ -47,6 +47,7 @@ class Person extends Component {
     return (
       <Aux>
         {/*Also same to Aux you can use <Fragment></Fragment> */}
+        {this.props.isAuth ? <p>Authenticated</p> : <p>Please login</p>}
         <p key="i1" onClick={this.props.click}>
           I'm {this.props.name} and i am {this.props.age} !years old
         </p>
