@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Aux from "../../../hoc/Auxiliary";
 import withClassV2 from "../../../hoc/withClassV2";
 import PropTypes from "prop-types";
+import AuthContext from "../../../context/auth-context";
 class Person extends Component {
   // !const random = Math.random();
   // !if (random > 0.7) {
@@ -14,6 +15,9 @@ class Person extends Component {
     super(props);
     this.inputElementRef = React.createRef();
   }
+
+  static contextType = AuthContext;
+
   shouldComponentUpdate(nextProps, nextState) {
     console.log("[Person.js]  shouldComponentUpdate");
     return true;
@@ -47,7 +51,16 @@ class Person extends Component {
     return (
       <Aux>
         {/*Also same to Aux you can use <Fragment></Fragment> */}
-        {this.props.isAuth ? <p>Authenticated</p> : <p>Please login</p>}
+        {/* <AuthContext.Consumer>
+          {(context) =>
+            context.authenticated ? <p>Authenticated</p> : <p>Please login</p>
+          }
+        </AuthContext.Consumer>*/}
+        {this.context.authenticated ? (
+          <p>Authenticated</p>
+        ) : (
+          <p>Please login</p>
+        )}
         <p key="i1" onClick={this.props.click}>
           I'm {this.props.name} and i am {this.props.age} !years old
         </p>
@@ -73,6 +86,7 @@ class Person extends Component {
     //? document.querySelector("input").focus();
     //ToDo this.inputElementRefv.focus();
     this.inputElementRef.current.focus();
+    console.log(this.context.authenticated);
   }
   componentDidUpdate() {
     console.log("[Person.js] componentDidUpdate");

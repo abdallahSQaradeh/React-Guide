@@ -79,9 +79,11 @@ class App extends Component {
     person.name = event.target.value;
     const persons = [...this.state.persons];
     persons[personIndex] = person;
-    this.setState({
-      persons: persons,
-      counter: this.state.counter + 1,
+    this.setState((prevState, props) => {
+      return {
+        persons: persons,
+        counter: prevState.counter + 1,
+      };
     });
   };
   deletePErsonHandler = (index) => {
@@ -126,7 +128,7 @@ class App extends Component {
         <AuthContext.Provider
           value={{
             authenticated: this.state.authenticated,
-            ligin: this.loginHandler,
+            login: this.loginHandler,
           }}
         >
           {/* // !Should Wrap all te element that involved in authentication 
@@ -137,7 +139,7 @@ class App extends Component {
               toggle={this.togglePersonsHandler}
               personsLength={this.state.persons.length}
               show={this.state.showPersons}
-              login={this.loginHandler}
+              // login={this.loginHandler}
             />
           ) : null}
           {persons}
